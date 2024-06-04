@@ -26,12 +26,24 @@ export const TasksProvider = ({ children }) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
   };
 
+  const editTask = async (taskId, updatedTask) => {
+    const res = await axios.put(
+      `http://localhost:3000/todos/${taskId}`,
+      updatedTask
+    );
+    const updatedTaskData = res.data.todo;
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task._id === taskId ? updatedTaskData : task))
+    );
+  };
+
   return (
     <TasksContext.Provider
       value={{
         tasks,
         addTask: postTask,
         deleteTask,
+        editTask,
       }}
     >
       {children}

@@ -5,12 +5,12 @@
 # Front-end build and environment files
 /front-end/public
 /front-end/.env
-front-end/package-lock.json
+/front-end/package-lock.json
 
 # Server configuration and environment files
 /server/config
 /server/.env
-server/package-lock.json
+/server/package-lock.json
 
 # Log files
 logs
