@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import EditingIcon from "../../icons/EditingIcon";
 import RemoveIcon from "../../icons/RemoveIcon";
+import { Button, Grid, Typography } from "@mui/material";
 
 function Task({
   taskId,
@@ -27,7 +28,7 @@ function Task({
   };
 
   return (
-    <div>
+    <div className="bg-blue-200 my-4 p-4">
       {isEditing ? (
         <form onSubmit={handleSubmit}>
           <input
@@ -45,26 +46,35 @@ function Task({
             onChange={(e) => setNewBody(e.target.value)}
             required
           />
-          <button
-            className="mt-3 px-2 py-1  bg-blue-500 text-white rounded-md"
+          <Button
+            className="mt-3 px-2 py-1 bg-blue-500 text-white rounded-md"
             type="submit"
           >
             Save
-          </button>
+          </Button>
         </form>
       ) : (
-        <div>
-          <h3 className="inline mr-5">Task : {taskTitle}</h3>
-          <button onClick={() => removeTask(taskId)}>
-            <RemoveIcon></RemoveIcon>
-          </button>
-          <button onClick={startEditTask}>
-            <EditingIcon></EditingIcon>
-          </button>
-          <p>description : {taskBody}</p>
-          <br />
-          <hr />
-        </div>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Grid item>
+            <Typography variant="p" className="block">
+              {taskTitle}
+            </Typography>
+            <Typography variant="p">{taskBody}</Typography>
+          </Grid>
+          <Grid item>
+            <Button onClick={() => removeTask(taskId)}>
+              <RemoveIcon></RemoveIcon>
+            </Button>
+            <Button onClick={startEditTask}>
+              <EditingIcon></EditingIcon>
+            </Button>
+          </Grid>
+        </Grid>
       )}
     </div>
   );

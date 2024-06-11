@@ -1,18 +1,23 @@
 // src/pages/Dashboard.js
-import React from "react";
+import { Box, Typography } from "@mui/material";
+import React, { useContext } from "react";
+import UsersContext from "../context/UsersContext";
 
 const Dashboard = () => {
+  const { currentUser } = useContext(UsersContext);
+
   return (
-    <div>
-      <h1 className="text-green-400 font-bold">Dashboard</h1>
-      <p className="text-red-500 font-bold">
+    <Box component="section">
+      <Typography variant="h3" className="text-green-700">
+        Hello {currentUser.firstName}
+      </Typography>
+      <Typography variant="p" className="text-green-600">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde laudantium
         hic assumenda odit dolorem est animi excepturi tempore ullam dolor,
         similique perferendis, quia totam expedita vel tempora dicta distinctio
         incidunt.
-      </p>
-      {/* Add your dashboard content here */}
-    </div>
+      </Typography>
+    </Box>
   );
 };
 
