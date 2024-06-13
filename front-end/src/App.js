@@ -12,6 +12,7 @@ import TaskManager from "./components/tasks/TaskManager";
 import { TasksProvider } from "./context/TasksContext";
 import SignUpForm from "./components/users/SignUpForm";
 import { UsersProvider } from "./context/UsersContext";
+import LoginForm from "./components/users/LoginForm";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Navigate to="/sign-up" />} />
                 <Route path="/sign-up" element={<SignUpForm />} />
+                <Route path="/login" element={<LoginForm />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/task-manager" element={<TaskManager />} />
               </Routes>

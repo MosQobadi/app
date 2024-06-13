@@ -11,26 +11,23 @@ export const TasksProvider = ({ children }) => {
   }, []);
 
   const getTasks = async () => {
-    const res = await axios.get("http://localhost:3000/todos");
+    const res = await axios.get("/todos");
     setTasks(res.data.todos);
   };
 
   const postTask = async (newTask) => {
-    const res = await axios.post("http://localhost:3000/todos", newTask);
+    const res = await axios.post("/todos", newTask);
     const savedTask = res.data.todo;
     setTasks((prevTasks) => [...prevTasks, savedTask]);
   };
 
   const deleteTask = async (taskId) => {
-    await axios.delete(`http://localhost:3000/todos/${taskId}`);
+    await axios.delete(`/todos/${taskId}`);
     setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
   };
 
   const editTask = async (taskId, updatedTask) => {
-    const res = await axios.put(
-      `http://localhost:3000/todos/${taskId}`,
-      updatedTask
-    );
+    const res = await axios.put(`/todos/${taskId}`, updatedTask);
     const updatedTaskData = res.data.todo;
     setTasks((prevTasks) =>
       prevTasks.map((task) => (task._id === taskId ? updatedTaskData : task))

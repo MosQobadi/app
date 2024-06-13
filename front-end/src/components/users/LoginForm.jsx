@@ -1,18 +1,19 @@
+import React, { useContext, useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import UsersContext from "../../context/UsersContext";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-function SignUpForm() {
-  const { signupUser } = useContext(UsersContext);
-  const { handleSubmit, control } = useForm();
+function LoginForm() {
+  const { loginUser, loggedInUser } = useContext(UsersContext);
+  const { handleSubmit, control, reset } = useForm();
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
-  const submit = async (newUser) => {
-    await signupUser(newUser);
+  const submit = (loggedInUser) => {
+    loginUser(loggedInUser);
+    console.log(loggedInUser);
+    reset();
   };
 
   return (
@@ -29,14 +30,7 @@ function SignUpForm() {
       }}
     >
       <Typography variant="h4" component="div" gutterBottom>
-        {/* {users.map((user) => {
-          return (
-            <div key={user._id}>
-              <h4>{user.firstName}</h4>
-            </div>
-          );
-        })} */}
-        Sign Up
+        Login
       </Typography>
 
       {errorMessage && (
@@ -44,29 +38,6 @@ function SignUpForm() {
           {errorMessage}
         </Typography>
       )}
-
-      <Controller
-        name="firstName"
-        control={control}
-        defaultValue=""
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="First Name"
-            variant="outlined"
-            required
-          />
-        )}
-      />
-
-      <Controller
-        name="lastName"
-        control={control}
-        defaultValue=""
-        render={({ field }) => (
-          <TextField {...field} label="Last Name" variant="outlined" required />
-        )}
-      />
 
       <Controller
         name="email"
@@ -93,10 +64,10 @@ function SignUpForm() {
       />
 
       <Button variant="contained" color="primary" type="submit">
-        Sign Up
+        Login
       </Button>
     </Box>
   );
 }
 
-export default SignUpForm;
+export default LoginForm;
